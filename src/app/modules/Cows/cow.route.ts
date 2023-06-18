@@ -7,6 +7,7 @@ const router = express.Router();
 router.post('/', validateRequest(cowvalidation), cowController.createcow);
 router.get('/', validateRequest(cowvalidation), cowController.getAllcows);
 router.get('/:id', cowController.getSinglecow);
+router.patch('/:id', cowController.updatecow);
 router.delete('/:id', cowController.deletecow);
 
 export const cowRoutes = router;
