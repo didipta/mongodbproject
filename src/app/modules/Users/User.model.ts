@@ -18,7 +18,7 @@ const userSchema = new Schema<IUser>(
     password: {
       type: String,
       required: true,
-      select: 0,
+      select: false,
     },
     name: {
       firstName: {
@@ -47,6 +47,9 @@ const userSchema = new Schema<IUser>(
     timestamps: true,
     toJSON: {
       virtuals: true,
+      transform: function (_doc, ret) {
+        delete ret.password;
+      },
     },
   }
 );

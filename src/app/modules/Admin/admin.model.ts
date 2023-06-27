@@ -1,6 +1,5 @@
 import { Schema } from 'mongoose';
-import { Role } from '../Users/user.contact';
-import { IAdmin } from './admin.interface';
+import { ARole, IAdmin } from './admin.interface';
 import { model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import config from '../../../config';
@@ -13,7 +12,7 @@ const adminSchema = new Schema<IAdmin>(
     },
     role: {
       type: String,
-      enum: Role,
+      enum: ARole,
       required: true,
     },
     password: {
@@ -40,6 +39,9 @@ const adminSchema = new Schema<IAdmin>(
     timestamps: true,
     toJSON: {
       virtuals: true,
+      transform: function (_doc, ret) {
+        delete ret.password;
+      },
     },
   }
 );

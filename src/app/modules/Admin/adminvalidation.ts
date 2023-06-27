@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Role } from '../Users/user.contact';
+import { ARole } from './admin.interface';
 
 const adminvalidation = z.object({
   body: z.object({
@@ -9,7 +9,7 @@ const adminvalidation = z.object({
       })
       .min(11)
       .max(11),
-    role: z.enum([...Role] as [string, ...string[]]),
+    role: z.enum([...ARole] as [string, ...string[]]),
     password: z
       .string({
         required_error: 'Password is required',

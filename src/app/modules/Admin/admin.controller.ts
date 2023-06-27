@@ -9,6 +9,7 @@ const createUser: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const admin = req.body;
     const result = await Adminservice.createUser(admin);
+
     sendResponse<IAdmin>(res, {
       statusCode: httpStatus.OK,
       success: true,

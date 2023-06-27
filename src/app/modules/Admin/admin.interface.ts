@@ -1,9 +1,10 @@
-import { IRole } from '../Users/User.interface';
-
 type IName = {
   firstName: string;
   lastName: string;
 };
+
+type IRole = 'ADMIN';
+export const ARole: IRole[] = ['ADMIN'];
 
 export type IAdmin = {
   phoneNumber: string;
