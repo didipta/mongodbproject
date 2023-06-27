@@ -1,10 +1,11 @@
-import { Schema, model } from 'mongoose';
-import { IUser } from './User.interface';
-import { Role } from './user.contact';
+import { Schema } from 'mongoose';
+import { Role } from '../Users/user.contact';
+import { IAdmin } from './admin.interface';
+import { model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import config from '../../../config';
 
-const userSchema = new Schema<IUser>(
+const adminSchema = new Schema<IAdmin>(
   {
     phoneNumber: {
       type: String,
@@ -34,14 +35,6 @@ const userSchema = new Schema<IUser>(
       type: String,
       required: true,
     },
-    budget: {
-      type: Number,
-      required: true,
-    },
-    income: {
-      type: Number,
-      required: true,
-    },
   },
   {
     timestamps: true,
@@ -51,7 +44,7 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-userSchema.pre('save', async function (next) {
+adminSchema.pre('save', async function (next) {
   // hashing user password
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this;
@@ -59,4 +52,4 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-export const User = model<IUser>('User', userSchema);
+export const Admin = model<IAdmin>('Admin', adminSchema);

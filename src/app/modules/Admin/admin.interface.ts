@@ -1,11 +1,11 @@
+import { IRole } from '../Users/User.interface';
+
 type IName = {
   firstName: string;
   lastName: string;
 };
 
-export type IRole = 'SELLER' | 'BUYER' | 'ADMIN';
-
-export type IUser = {
+export type IAdmin = {
   phoneNumber: string;
   role: IRole;
   password: string;
@@ -13,6 +13,4 @@ export type IUser = {
   firstName: string;
   lastName: string;
   address: string;
-  budget: number;
-  income: number;
 };

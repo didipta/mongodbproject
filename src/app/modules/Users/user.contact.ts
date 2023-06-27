@@ -1,3 +1,3 @@
 import { IRole } from './User.interface';
 
-export const Role: IRole[] = ['SELLER', 'BUYER'];
+export const Role: IRole[] = ['SELLER', 'BUYER', 'ADMIN'];
