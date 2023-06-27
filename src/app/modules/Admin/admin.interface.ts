@@ -3,12 +3,13 @@ type IName = {
   lastName: string;
 };
 
-type IRole = 'ADMIN';
-export const ARole: IRole[] = ['ADMIN'];
+export type AdminRole = 'ADMIN';
+
+export const ARole: AdminRole[] = ['ADMIN'];
 
 export type IAdmin = {
   phoneNumber: string;
-  role: IRole;
+  role: AdminRole;
   password: string;
   name: IName;
   firstName: string;
