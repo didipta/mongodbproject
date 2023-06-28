@@ -2,8 +2,9 @@ import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
 import { Admin } from '../Admin/admin.model';
 import { ILoginUser, ILoginUserResponse } from './auth.interface';
-// import config from '../../../config';
-// import { Secret } from 'jsonwebtoken';
+import config from '../../../config';
+import { Secret } from 'jsonwebtoken';
+import { jwtHelpers } from '../../Healper/jwtHelpers';
 
 const loginAdmin = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   const { phoneNumber, password } = payload;
@@ -21,21 +22,19 @@ const loginAdmin = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Password is incorrect');
   }
 
-  // const { phoneNumber:phone, role} = isUserExist;
-  // const accessToken = jwtHelpers.createToken(
-  //   { phone, role },
-  //   config.jwt_secret as Secret,
-  //   config.jwt_refresh_expires_in as string
-  // );
+  const { phoneNumber: phone, role } = isAdminExist;
+  const accessToken = jwtHelpers.createToken(
+    { phone, role },
+    config.jwt_secret as Secret,
+    config.jwt_expires_in as string
+  );
 
-  // const refreshToken = jwtHelpers.createToken(
-  //   { userId, role },
-  //   config.jwt.refresh_secret as Secret,
-  //   config.jwt.refresh_expires_in as string
-  // );
+  const refreshToken = jwtHelpers.createToken(
+    { phone, role },
+    config.jwt_refresh_secret as Secret,
+    config.jwt_refresh_expires_in as string
+  );
 
-  const accessToken = 'liihh';
-  const refreshToken = 'sgf';
   return {
     accessToken,
     refreshToken,
