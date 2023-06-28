@@ -24,7 +24,27 @@ const loginAdmin = catchAsync(async (req: Request, res: Response) => {
     data: others,
   });
 });
+const loginuser = catchAsync(async (req: Request, res: Response) => {
+  const { ...loginData } = req.body;
+  const result = await authService.loginuser(loginData);
+  const { refreshToken, ...others } = result;
+
+  const cookieOptions = {
+    secure: config.env === 'production',
+    httpOnly: true,
+  };
+
+  res.cookie('refreshToken', refreshToken, cookieOptions);
+
+  sendResponse<ILoginUserResponse>(res, {
+    statusCode: 200,
+    success: true,
+    message: 'User lohggedin successfully !',
+    data: others,
+  });
+});
 
 export const authController = {
   loginAdmin,
+  loginuser,
 };

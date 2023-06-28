@@ -1,10 +1,10 @@
 import { Schema, model } from 'mongoose';
-import { IUser } from './User.interface';
+import { IUser, UserModel } from './User.interface';
 import { Role } from './user.contact';
 import bcrypt from 'bcrypt';
 import config from '../../../config';
 
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema<IUser, UserModel>(
   {
     phoneNumber: {
       type: String,
@@ -54,6 +54,22 @@ const userSchema = new Schema<IUser>(
   }
 );
 
+userSchema.statics.isUserExist = async function (
+  phoneNumber: string
+): Promise<Pick<IUser, 'phoneNumber' | 'password' | 'role'> | null> {
+  return await User.findOne(
+    { phoneNumber },
+    { phoneNumber: 1, password: 1, role: 1 }
+  );
+};
+
+userSchema.statics.isPasswordMatched = async function (
+  givenPassword: string,
+  savedPassword: string
+): Promise<boolean> {
+  return await bcrypt.compare(givenPassword, savedPassword);
+};
+
 userSchema.pre('save', async function (next) {
   // hashing user password
   // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -62,4 +78,4 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-export const User = model<IUser>('User', userSchema);
+export const User = model<IUser, UserModel>('User', userSchema);

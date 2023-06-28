@@ -6,9 +6,14 @@ import { authController } from './auth.controller';
 const router = express.Router();
 
 router.post(
-  '/login',
+  'admin/login',
   validateRequest(AuthValidation.loginZodSchema),
   authController.loginAdmin
+);
+router.post(
+  'users/login',
+  validateRequest(AuthValidation.loginZodSchema),
+  authController.loginuser
 );
 
 export const AuthRoute = router;

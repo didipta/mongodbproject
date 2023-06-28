@@ -1,3 +1,5 @@
+import { Model } from 'mongoose';
+
 type IName = {
   firstName: string;
   lastName: string;
@@ -16,3 +18,16 @@ export type IUser = {
   budget: number;
   income: number;
 };
+
+export type UserModel = {
+  isUserExist(
+    // eslint-disable-next-line no-unused-vars
+    phoneNumber: string
+  ): Promise<Pick<IUser, 'phoneNumber' | 'password' | 'role'>>;
+  isPasswordMatched(
+    // eslint-disable-next-line no-unused-vars
+    givenPassword: string,
+    // eslint-disable-next-line no-unused-vars
+    savedPassword: string
+  ): Promise<boolean>;
+} & Model<IUser>;
