@@ -1,14 +1,15 @@
 import { Schema } from 'mongoose';
-import { ARole, IAdmin } from './admin.interface';
+import { ARole, AdminrModel, IAdmin } from './admin.interface';
 import { model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import config from '../../../config';
 
-const adminSchema = new Schema<IAdmin>(
+const adminSchema = new Schema<IAdmin, AdminrModel>(
   {
     phoneNumber: {
       type: String,
       required: true,
+      unique: true,
     },
     role: {
       type: String,
@@ -46,6 +47,22 @@ const adminSchema = new Schema<IAdmin>(
   }
 );
 
+adminSchema.statics.isAdminExist = async function (
+  phoneNumber: string
+): Promise<Pick<IAdmin, 'phoneNumber' | 'password' | 'role'> | null> {
+  return await Admin.findOne(
+    { phoneNumber },
+    { phoneNumber: 1, password: 1, role: 1 }
+  );
+};
+
+adminSchema.statics.isPasswordMatched = async function (
+  givenPassword: string,
+  savedPassword: string
+): Promise<boolean> {
+  return await bcrypt.compare(givenPassword, savedPassword);
+};
+
 adminSchema.pre('save', async function (next) {
   // hashing user password
   // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -54,4 +71,4 @@ adminSchema.pre('save', async function (next) {
   next();
 });
 
-export const Admin = model<IAdmin>('Admin', adminSchema);
+export const Admin = model<IAdmin, AdminrModel>('Admin', adminSchema);
