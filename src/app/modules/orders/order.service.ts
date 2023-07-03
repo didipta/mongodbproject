@@ -11,7 +11,12 @@ const getallorders = async (): Promise<Iorder[] | null> => {
   return result;
 };
 
+const getSingleorder = async (id: string): Promise<Iorder | null> => {
+  const result = await Order.findById(id).populate('Cow').populate('buyer');
+  return result;
+};
 export const OrderService = {
   createorder,
   getallorders,
+  getSingleorder,
 };
