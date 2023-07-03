@@ -6,6 +6,11 @@ import sendResponse from '../../../shared/sendResponse';
 import { IUser } from './User.interface';
 import { paginationFields } from '../../../shared/pagination';
 import pick from '../../../shared/pick';
+import { jwtHelpers } from '../../Healper/jwtHelpers';
+import config from '../../../config';
+import { Secret } from 'jsonwebtoken';
+import ApiError from '../../../errors/ApiError';
+import { IAdmin } from '../Admin/admin.interface';
 
 const createUser: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
@@ -57,15 +62,59 @@ const deleteuser = catchAsync(async (req: Request, res: Response) => {
 });
 const getSingleuser = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const result = await UserService.getSingleuser(id);
 
-  sendResponse<IUser>(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Single user fetched successfully',
-    data: result,
-  });
+  if (id === 'my-profile') {
+    const token = req.headers.authorization;
+
+    if (!token) {
+      throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorized');
+    }
+    // verify token
+    let verifiedUser = null;
+    verifiedUser = jwtHelpers.verifyToken(token, config.jwt_secret as Secret);
+
+    const { phone, role } = verifiedUser;
+
+    const result = await UserService.getmyprofile(phone, role);
+
+    sendResponse<IUser | IAdmin>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Single user fetched successfully',
+      data: result,
+    });
+  } else {
+    const result = await UserService.getSingleuser(id);
+
+    sendResponse<IUser>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Single user fetched successfully',
+      data: result,
+    });
+  }
 });
+// const getmyprofile = catchAsync(async (req: Request, res: Response) => {
+//   const token = req.headers.authorization;
+
+//   if (!token) {
+//     throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorized');
+//   }
+//   // verify token
+//   let verifiedUser = null;
+//   verifiedUser = jwtHelpers.verifyToken(token, config.jwt_secret as Secret);
+
+//   const { phone,role } =verifiedUser
+
+//   const result = await UserService.getmyprofile(phone,role);
+
+//   sendResponse<IUser|IAdmin>(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'Single user fetched successfully',
+//     data: result,
+//   });
+// });
 
 export const UserController = {
   createUser,

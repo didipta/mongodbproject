@@ -1,6 +1,8 @@
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../shared/pagination copy';
 import { paginationHelpers } from '../../../shared/paginationHelper';
+import { IAdmin } from '../Admin/admin.interface';
+import { Admin } from '../Admin/admin.model';
 import { IUser } from './User.interface';
 import { User } from './User.model';
 
@@ -34,6 +36,19 @@ const getSingleuser = async (id: string): Promise<IUser | null> => {
   return result;
 };
 
+const getmyprofile = async (
+  phone: string,
+  role: string
+): Promise<IUser | null | IAdmin> => {
+  let result;
+  if (role === 'ADMIN') {
+    result = await Admin.findOne({ phoneNumber: phone });
+  } else {
+    result = await User.findOne({ phoneNumber: phone });
+  }
+  return result;
+};
+
 const updateuser = async (
   id: string,
   payload: Partial<IUser>
@@ -56,4 +71,5 @@ export const UserService = {
   updateuser,
   deleteuser,
   getAlluser,
+  getmyprofile,
 };
