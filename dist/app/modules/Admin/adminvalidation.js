@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const zod_1 = require("zod");
-const user_contact_1 = require("./user.contact");
-const uservalidation = zod_1.z.object({
+const admin_interface_1 = require("./admin.interface");
+const adminvalidation = zod_1.z.object({
     body: zod_1.z.object({
         phoneNumber: zod_1.z
             .string({
@@ -10,7 +10,7 @@ const uservalidation = zod_1.z.object({
         })
             .min(11)
             .max(11),
-        role: zod_1.z.enum([...user_contact_1.Role]),
+        role: zod_1.z.enum([...admin_interface_1.ARole]),
         password: zod_1.z
             .string({
             required_error: 'Password is required',
@@ -36,17 +36,7 @@ const uservalidation = zod_1.z.object({
             required_error: 'Address is required',
         })
             .min(2)
-            .max(20),
-        budget: zod_1.z
-            .number({
-            required_error: 'Budget is required',
-        })
-            .min(0),
-        income: zod_1.z
-            .number({
-            required_error: 'Income is required',
-        })
-            .min(0),
+            .max(200),
     }),
 });
-exports.default = uservalidation;
+exports.default = adminvalidation;

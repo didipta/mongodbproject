@@ -1,4 +1,4 @@
-  ### Live Link: https://digital-cow-hut-assignment-3.vercel.app/
+  <!-- ### Live Link: https://digital-cow-hut-assignment-3.vercel.app/
   ### Application Routes:
 
    #### User
@@ -23,4 +23,47 @@
      
    #### Orders
    - api/v1/orders (POST)
-   - api/v1/orders (GET)
+   - api/v1/orders (GET) -->
+
+
+  ### Live Link: https://digital-cow-hut-assignment-3.vercel.app/
+  ### Application Routes:
+  
+  ## Main part
+  
+   ### Auth (User)
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/auth/users/login (POST)
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/users/signup (POST)
+   - Route:  https://digital-cow-hut-assignment-3.vercel.app/api/v1/auth/refresh-token (POST)
+
+   ### Auth (Admin)
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/admins/create-admin (POST)
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/auth/admin/login (POST)
+   
+   ### User
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/users (GET)
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/users/648d3c2c6bd23a6e67bf2f32 (Single GET)
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/users/648d3c2c6bd23a6e67bf2f32 (PATCH)
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/users/648d3c2c6bd23a6e67bf2f32 (DELETE)
+
+   #### Cows
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/cows (POST)
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/cows (GET)
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/cows/648f32cdfc2171bd7ff55aa8 (Single GET) 
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/cows/648f32cdfc2171bd7ff55aa8 (PATCH) 
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/cows/648f32cdfc2171bd7ff55aa8 (DELETE) 
+   #### Orders
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/orders (POST)
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/orders (GET)
+
+ ## Bonus Part
+
+#### Admin
+   -Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/admins/create-admin (POST)
+
+#### My Profile
+- Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/users/my-profile (GET)
+- Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/admins/my-profile (GET)
+
+#### Order:
+ - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/orders/64a2433dd114b6fcde936ca5 (GET)
