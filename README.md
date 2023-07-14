@@ -32,7 +32,7 @@
   ## Main part
   
    ### Auth (User)
-   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/auth/users/login (POST)
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/auth/login (POST)
    - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/users/signup (POST)
    - Route:  https://digital-cow-hut-assignment-3.vercel.app/api/v1/auth/refresh-token (POST)
 
