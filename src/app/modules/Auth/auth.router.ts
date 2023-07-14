@@ -11,7 +11,7 @@ router.post(
   authController.loginAdmin
 );
 router.post(
-  '/users/login',
+  '/login',
   validateRequest(AuthValidation.loginZodSchema),
   authController.loginuser
 );
