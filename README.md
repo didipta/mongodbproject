@@ -25,20 +25,19 @@
    - api/v1/orders (POST)
    - api/v1/orders (GET) -->
 
-
   ### Live Link: https://digital-cow-hut-assignment-3.vercel.app/
   ### Application Routes:
   
   ## Main part
   
    ### Auth (User)
-   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/auth/users/login (POST)
-   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/users/signup (POST)
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/auth/login (POST)
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/auth/signup (POST)
    - Route:  https://digital-cow-hut-assignment-3.vercel.app/api/v1/auth/refresh-token (POST)
 
    ### Auth (Admin)
    - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/admins/create-admin (POST)
-   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/auth/admin/login (POST)
+   - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/admins/login (POST)
    
    ### User
    - Route: https://digital-cow-hut-assignment-3.vercel.app/api/v1/users (GET)
